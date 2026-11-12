@@ -1,0 +1,1 @@
+# This file is assigned to Aaron Yumul, who will write the functions that get the public IPv4 and IPv6 addresses from ipify.
