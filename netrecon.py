@@ -39,11 +39,15 @@ def main():
     )
 
     # Held for future implementations
-    # megroup = parser.add_mutually_exclusive_group()
-    # megroup.add_argument("--ipv4", action="store_true", help="show only the IPv4 address")
-    # megroup.add_argument("--ipv6", action="store_true", help="show only the IPv6 address")
-    # parser.add_argument("--no-metadata", action="store_true", help="don't show the network details")
-    # args = parser.parse_args()
+    megroup = parser.add_mutually_exclusive_group()
+    # --ipv4 and --ipv6 are mutually exclusive and cannot be used together as it makes the tool useless by output
+    megroup.add_argument("--ipv4", action="store_true", help="show only the IPv4 address")
+    megroup.add_argument("--ipv6", action="store_true", help="show only the IPv6 address")
+    
+    parser.add_argument("--no-metadata", action="store_true", help="don't show the network details")
+    parser.add_argument("--lookup", metavar="IP_ADDRESS", help="look up an IPv4 address you type instead of your own")
+    parser.add_argument("--json", action="store_true", help="print the results as JSON instead of the formatted report")
+    args = parser.parse_args()
 
     # No options yet, but this line is what makes --help work
     parser.parse_args()
