@@ -1,0 +1,28 @@
+name: Run tests
+
+on:
+  push:
+    branches: [main, test]
+  pull_request:
+    branches: [main, test]
+
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.11", "3.12"]
+    steps:
+      # Grab our code into GitHub machine
+      - uses: actions/checkout@v4
+
+      # Install the Python version
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      # Install libraries in requirements.txt
+      - run: pip install -r requirements.txt
+
+      # Run all the tests
+      - run: python -m unittest discover -s tests -t . -v
